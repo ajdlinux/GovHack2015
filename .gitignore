@@ -1,6 +1,9 @@
 # have a folder for local things
 nonpublic/
 
+# IDEA/PyCharm
+.idea/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
