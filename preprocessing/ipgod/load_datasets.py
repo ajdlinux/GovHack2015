@@ -56,14 +56,14 @@ def main():
     """
     # Check if path passed
     if len(argv) != 2:
-        print("{0} dataset_path".format(sys.argv[0]))
-        sys.exit(1)
+        print("{0} dataset_path".format(argv[0]))
+        exit(1)
 
     # Check for valid path
     path = Path(argv[1])
     if not path.exists() and path.is_dir():
         print("invalid or missing path: {0}".format(argv[1]))
-        sys.exit(1)
+        exit(1)
 
     # glob search for .csv's in path and add
     file_count = 0
