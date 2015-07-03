@@ -1,5 +1,6 @@
 __author__ = 'Benjamin George Roberts <benjamin.roberts@anu.edu.au>'
 
+import csv
 from sys import argv
 from pathlib import Path
 from ..MongoSingleton import MongoSingleton
@@ -33,11 +34,11 @@ class DataSet:
         entry_count = 0
 
         # Add the objects to mongo
-        for value_row in self.dataset_file:
-            values = value_row.strip().split(",")
-            assert(len(values) == len(self.column_names))
+        value_rows = csv.reader(self.dataset_file, delimiter=",", quotechar='"')
+        for value_row in value_rows:
+            assert(len(value_row) is len(self.column_names))
 
-            collection.insert(dict(zip(self.column_names, values)))
+            collection.insert(dict(zip(self.column_names, value_row)))
             entry_count += 1
 
             if (entry_count % 1000) is 0:
