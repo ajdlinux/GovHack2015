@@ -1,0 +1,17 @@
+[Unit]
+Description=gunicorn daemon
+Require=gunicorn.socket
+After=network.target
+
+[Service]
+PIDFile=/tmp/gunicorn.pid
+User=govhack
+Group=govhack
+WorkingDirectory=/srv/patentstori.es/patentstories
+ExecStart=/usr/local/bin/gunicorn --pid /tmp/gunicorn.pid patentstories.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
