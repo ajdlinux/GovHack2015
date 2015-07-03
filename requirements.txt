@@ -1,1 +1,4 @@
 wheel==0.24.0
+pathlib==1.0.1
+Django==1.8.2
+pymongo==3.0.3
