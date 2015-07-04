@@ -12,6 +12,7 @@
     {% endif %}
 
     <ul class="timeline">
+    <li class="timeline-add"><div class="timeline-badge-mini success"><a href="annotate"><i class="glyphicon glyphicon-plus"></i></a></div></li>
     {% for event in timeline %}
         <li{% cycle '' ' class="timeline-inverted"' %}>
             <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
@@ -31,7 +32,7 @@
             </div>
         </li>
 
-        <li class="timeline-add"><div class="timeline-badge-mini success"><i class="glyphicon glyphicon-plus"></i></div></li>
+        <li class="timeline-add"><div class="timeline-badge-mini success"><a href="annotate"><i class="glyphicon glyphicon-plus"></i></a></div></li>
     {% endfor %}
     </ul>
     {% endautoescape %}

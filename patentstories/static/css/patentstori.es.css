@@ -148,6 +148,10 @@ footer {
             border-bottom-left-radius: 50%;
         }
 
+        .timeline > li > .timeline-badge-mini > a {
+            color: #fff;
+        }
+
         .timeline > li.timeline-inverted > .timeline-panel {
             float: right;
         }
