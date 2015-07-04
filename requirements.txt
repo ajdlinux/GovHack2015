@@ -1,3 +1,4 @@
+psycopg2==2.6.1
 Django==1.8.2
 -e git+https://github.com/jezdez/django-configurations@5ece1070448d3e026b81422691c60207f5699c0c#egg=django-configurations
 gunicorn==19.3.0
