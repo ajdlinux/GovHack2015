@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 from configurations import Configuration
-from configurations.values import SecretValue, URLValue
+from configurations.values import SecretValue, URLValue, BooleanValue
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -94,6 +94,22 @@ class Base(Configuration):
 
     STATIC_ROOT = os.path.join(BASE_DIR, "..", "public", "static")
 
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'loggers': {
+            'django': {
+                'level': 'INFO',
+                'handlers': ['console']
+            }
+        }
+    }
+
 # Django Configurations
 
 class Development(Base):
@@ -123,7 +139,7 @@ class Production(Base):
     SECRET_KEY = SecretValue()
 
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = False
+    DEBUG = BooleanValue(False)
 
 
     # Quick-start development settings - unsuitable for production
