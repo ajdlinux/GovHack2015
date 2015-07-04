@@ -85,7 +85,7 @@ class PatentAnnotation(models.Model):
     Annotations for patent applications
     """
     patent_application = models.ForeignKey('PatentApplication')
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     annotation_type = enum.EnumField(PatentAnnotationTypes)
     title = models.CharField(max_length=100)
     body = models.TextField(blank=True, null=True)
