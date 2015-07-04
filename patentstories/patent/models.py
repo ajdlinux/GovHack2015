@@ -8,7 +8,7 @@ class PatentApplication(models.Model):
     """
     Top level type for patent applications. Acts as both a Django model and MongoDB lookup.
     """
-    australian_appl_no = models.IntegerField(primary_key=True)
+    australian_appl_no = models.CharField(primary_key=True, max_length=10)
     def get_event_timeline(self):
         """
         Build or return the chronological timeline of Patent Application events

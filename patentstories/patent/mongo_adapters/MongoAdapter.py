@@ -14,12 +14,12 @@ class MongoAdapter():
         :param collection: collection/database of event object
         :type: str
         :param patent_application_no: application number
-        :type: int
+        :type: str
         :return:
         """
         self.__collection__ = MongoSingleton.get_db()[collection]
         #TODO is PK actually a unique key?
-        self.__record__ = self.__collection__.find_one({PK_NAME: str(patent_application_no)})
+        self.__record__ = self.__collection__.find_one({PK_NAME: patent_application_no})
 
     def exists(self):
         """
