@@ -1,10 +1,10 @@
 {% extends "site_base.html" %}
 
-{% block title %}Patent #{{ patent.patent_id }} - {{ patent.description }}{% endblock %}
+{% block title %}Patent #{{ patent.australian_appl_no }} - {{ patent.description }}{% endblock %}
 
 {% block content %}
 
-    <h1>Patent #{{ patent.patent_id }} - {{ patent.description }}</h1>
+    <h1>Patent #{{ patent.australian_appl_no }} - {{ patent.description }}</h1>
 
 
     <ul class="timeline">
@@ -12,11 +12,18 @@
         <li{% cycle '' ' class="timeline-inverted"' %}>
             <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
             <div class="timeline-panel">
-                <h4 class="timeline-title">{{ event.title }}</h4>
+                <h4 class="timeline-title">{{ event.event }}{% if event.title %} - {{ event.title }}{% endif %}</h4>
                 <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ event.date }}</small></p>
-            </div>
-            <div class="timeline-body">
-                <p>{{ event.description }}</p>
+                <div class="timeline-body">
+                    {% if event.information %}
+                        <ul>
+                            {% for item in event.information %}
+                                {% if item %}<li>{{ item }}</li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <p>{{ event.body }}</p>
+                </div>
             </div>
         </li>
     {% endfor %}
