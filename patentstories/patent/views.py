@@ -5,5 +5,9 @@ from django.shortcuts import render
 
 def dummy_patent(request, patent_id):
     patent = {'patent_id': patent_id, 'description': 'A patent on a really cool thing'}
-    context = {'patent': patent}
+    timeline = [{
+        'title': 'bananas on toast',
+        'date': '25th September 2014',
+    }, None, None, None, None]
+    context = {'patent': patent, 'timeline': timeline}
     return render(request, 'patent/patent.html', context)
