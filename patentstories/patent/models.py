@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.db import models
+from django_enumfield import enum
 from .mongo_adapters import MONGO_PATENT_EVENT_ADAPTERS
 
 class PatentApplication(models.Model):
@@ -40,5 +42,25 @@ class PatentApplication(models.Model):
         return self.timeline
 
 
+class PatentAnnotationTypes(enum.Enum):
+    SUMMARY = 0
+    NEWS = 1
+    COMMENT = 2
+    PICTURE = 3
 
+    labels = {
+        SUMMARY: 'Summary',
+        NEWS: 'News article',
+        COMMENT: 'Comment',
+        PICTURE: 'Picture',
+    }
 
+class PatentAnnotation(models.Model):
+    patent_application = models.ForeignKey('PatentApplication')
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL)
+    annotation_type = enum.EnumField(PatentAnnotationTypes)
+    title = models.CharField(max_length=100)
+    body = models.TextField()
+    link = models.URLField()
+    link_other = models.CharField(max_length=100)
+    date = models.DateField()
