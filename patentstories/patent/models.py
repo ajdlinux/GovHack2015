@@ -1,6 +1,4 @@
 from django.db import models
-from .mongo_adapters.IPGOD101 import IPGOD101Adapter
-from django.core.exceptions import ValidationError
 from .mongo_adapters import MONGO_PATENT_EVENT_ADAPTERS
 
 class PatentApplication(models.Model):
@@ -40,20 +38,6 @@ class PatentApplication(models.Model):
         self.timeline.sort(key=lambda x: x["date"])
 
         return self.timeline
-
-    def clean(self):
-        """
-        Validation of model. Checks if patent present in IPGOD101 collection
-`       """
-        if not self.exists():
-            raise ValidationError({
-                "australian_appl_no": "{0} doesn't exist in IPGOD101".format(self.australian_appl_no)})
-
-    def exists(self):
-        """
-        Checks if patent present in IPGOD101 collection
-        """
-        return IPGOD101Adapter(self.australian_appl_no).exists()
 
 
 
