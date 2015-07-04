@@ -6,3 +6,4 @@ pathlib==1.0.1
 pymongo==3.0.3
 wheel==0.24.0
 raven>=5.3.1
+django-bootstrap3>=6.1.0

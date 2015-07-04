@@ -34,6 +34,7 @@ class Base(Configuration):
         'django.contrib.staticfiles',
         'django.contrib.sites',
         'django.contrib.flatpages',
+        'bootstrap3',
         'raven.contrib.django.raven_compat',
     )
 
