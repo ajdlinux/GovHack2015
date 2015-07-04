@@ -1,5 +1,6 @@
 # have a folder for local things
 nonpublic/
+public/
 
 # IDEA/PyCharm
 .idea/
