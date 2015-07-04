@@ -6,6 +6,7 @@ from datetime import datetime
 PK_NAME = "australian_appl_no"
 
 class MongoAdapter():
+    DATE_NOT_AVAILABLE = datetime.strptime("12/31/2999","%m/%d/%Y")
 
     def __init__(self, collection, patent_application_no):
         """
@@ -63,11 +64,20 @@ class MongoAdapter():
         event_key = "{0}_date".format(event_name)
 
         # jump out if bad record or missing event
-        if not self.exists() or event_key not in self.__record__:
-            return None
+        if not self.exists() or \
+            event_key not in self.__record__ or \
+            len(self.__record__[event_key]) is 0:
+                return None
 
         date_str = self.__record__[event_key]
-        return datetime.strptime(date_str, "%m/%d/%Y")
+        print(date_str)
+        date = datetime.strptime(date_str.split(' ')[0], "%m/%d/%Y")
+
+        # check for bogus date
+        if date.date() == MongoAdapter.DATE_NOT_AVAILABLE.date():
+            return None
+
+        return date.date()
 
     def get_events(self):
         """
@@ -76,3 +86,35 @@ class MongoAdapter():
         :rtype: list
         """
         pass
+
+    def process_events_list(self, event_dict):
+        """
+        Using a dict in the format of {"eventname": ("nice name", ["data"]}, build the list of events using the provided
+        document
+        :param event_document: event document retrieved from mongodb
+        :type: dict
+        :param event_list:
+        :type: dict
+        :return: event list
+        :rtype: list
+        """
+
+        event_list = []
+
+        #retrieve each entry in event_dict
+        for event_name, (event_nice, event_data) in event_dict.items():
+            date = self.get_event_date(event_name)
+            if date is None:
+                continue
+
+            # construct the event object and retrieve any data
+            event = {
+                "date": date,
+                "event": event_nice,
+                "information": [self.__record__[data] for data in event_data if data in self.__record__]
+            }
+
+            event_list.append(event)
+
+        return event_list
+
