@@ -92,7 +92,7 @@ class Base(Configuration):
         os.path.join(BASE_DIR, "static"),
     )
 
-    STATIC_ROOT = os.path.join(BASE_DIR, "public")
+    STATIC_ROOT = os.path.join(BASE_DIR, "..", "public", "static")
 
 # Django Configurations
 
@@ -129,7 +129,7 @@ class Production(Base):
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-    ALLOWED_HOSTS = ["127.0.0.1"]
+    ALLOWED_HOSTS = ["patentstori.es", "127.0.0.1"]
 
 
     # Database
@@ -137,8 +137,9 @@ class Production(Base):
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'govhack',
+            'USER': 'govhack',
         }
     }
 
