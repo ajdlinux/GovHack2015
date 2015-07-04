@@ -71,6 +71,7 @@ def glyphify(timeline):
     :type: list
     """
     for event in timeline:
-        glyph, catagory = EVENT_GLYPH_SET[event["event_type"]]
-        event["glyph"] = glyph
-        event["catagory"] = catagory
+        if 'event_type' in event:
+            glyph, catagory = EVENT_GLYPH_SET[event["event_type"]]
+            event["glyph"] = glyph
+            event["catagory"] = catagory
