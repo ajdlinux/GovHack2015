@@ -2,8 +2,8 @@
 
 __author__ = 'Andrew Donnellan'
 from django.conf.urls import url
-from .views import dummy_patent
+from .views import view_patent
 
 urlpatterns = [
-    url(r'^(?P<patent_id>\w{10})/$', dummy_patent, name='patent'),
+    url(r'^(?P<patent_id>\w{10})/$', view_patent, name='patent'),
 ]
