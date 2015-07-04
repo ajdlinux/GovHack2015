@@ -1,3 +1,4 @@
+import datetime
 from django.conf import settings
 from django.db import models
 from django_enumfield import enum
@@ -41,8 +42,32 @@ class PatentApplication(models.Model):
 
         return self.timeline
 
+    def get_combined_timeline(self):
+        """
+        Build a combined timeline consisting of the events from the IPGOD database and the user annotations.
+        :return: list of event objects
+        :rtype: list
+        """
+        timeline = self.get_event_timeline()
+        annotations = self.patentannotation_set.all()
+        for annotation in annotations:
+            timeline.append({
+                'event': PatentAnnotationTypes.label(annotation.annotation_type),
+                'date': annotation.date,
+                'creator': annotation.creator,
+                'title': annotation.title,
+                'body': annotation.body,
+                'link': annotation.link,
+                'link_other': annotation.link_other,
+            })
+        timeline.sort(key=lambda x: x['date'] if x['date'] else datetime.datetime.min)
+        return timeline
+
 
 class PatentAnnotationTypes(enum.Enum):
+    """
+    Enum specifying types for annotations
+    """
     SUMMARY = 0
     NEWS = 1
     COMMENT = 2
@@ -50,17 +75,20 @@ class PatentAnnotationTypes(enum.Enum):
 
     labels = {
         SUMMARY: 'Summary',
-        NEWS: 'News article',
+        NEWS: 'News Article',
         COMMENT: 'Comment',
         PICTURE: 'Picture',
     }
 
 class PatentAnnotation(models.Model):
+    """
+    Annotations for patent applications
+    """
     patent_application = models.ForeignKey('PatentApplication')
     creator = models.ForeignKey(settings.AUTH_USER_MODEL)
     annotation_type = enum.EnumField(PatentAnnotationTypes)
     title = models.CharField(max_length=100)
-    body = models.TextField()
-    link = models.URLField()
-    link_other = models.CharField(max_length=100)
-    date = models.DateField()
+    body = models.TextField(blank=True, null=True)
+    link = models.URLField(blank=True, null=True)
+    link_other = models.CharField(max_length=100, blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
