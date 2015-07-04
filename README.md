@@ -1,2 +1,2 @@
-# GovHack2015
-GovHack 2015 Project
+# patentstori.es - a GovHack 2015 project
+![patentstori.es](docs/patentstori.es_logo_32pxh.png?raw=true)
