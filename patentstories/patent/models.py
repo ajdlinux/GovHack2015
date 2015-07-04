@@ -17,7 +17,7 @@ class PatentApplication(models.Model):
         
         # Check for cached copy
         #TODO memcache/mongodb/redis this if slow
-        if "timeline" in self.__dict__:
+        if "timeline" in self.__dict__ and len(self.timeline) is not 0:
             return self.timeline
 
         if self.australian_appl_no is None:
