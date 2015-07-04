@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db import models
 from django_enumfield import enum
 from .mongo_adapters import MONGO_PATENT_EVENT_ADAPTERS
+from .external_adapters import EXTERNAL_PATENT_EVENT_ADAPTERS
 
 class PatentApplication(models.Model):
     """
