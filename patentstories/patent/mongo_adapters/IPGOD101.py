@@ -14,6 +14,7 @@ class IPGOD101Adapter(MongoAdapter):
         :rtype: list
         """
         return [{
+            "event_type": "application",
             "event": "Application",
             "date": self.get_event_date("application"),
         }]

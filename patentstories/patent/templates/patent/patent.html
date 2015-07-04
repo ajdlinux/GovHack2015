@@ -14,7 +14,7 @@
     <ul class="timeline">
     {% for event in timeline %}
         <li{% cycle '' ' class="timeline-inverted"' %}>
-            <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+            <div class="timeline-badge {{ event.catagory }}"><i class="glyphicon {{ event.glyph }}"></i></div>
             <div class="timeline-panel">
                 <h4 class="timeline-title">{{ event.event }}{% if event.title %} - {{ event.title }}{% endif %}</h4>
                 <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ event.date }}</small></p>
