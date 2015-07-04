@@ -21,7 +21,7 @@ EVENT_FIELDS= {
     "npe":                      ("National Phase Entered", []),
     "opi":                      ("Open to Public Inspection (OPI)", []),
     "opi_published_in_journal": ("OPI Published in Journal", []),
-    "continue_renew_fee_paid":  ("Renewal Paid", []),
+    "continue_renew_fee_paid":  ("Renewal Fee Due", []),
     "in_force_to":              ("No Longer Enforced", [])
 }
 
