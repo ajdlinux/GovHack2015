@@ -111,3 +111,15 @@ class PatentAnnotation(models.Model):
     link = models.URLField(blank=True, null=True)
     link_other = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
+
+
+class FeaturedStory(models.Model):
+    """
+    Details of a featured story on the front page
+    """
+    patent_application = models.ForeignKey('PatentApplication')
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='featured/')
+    image_alt = models.CharField(max_length=100)
+    enabled = models.BooleanField(default=True)

@@ -97,6 +97,10 @@ class Base(Configuration):
 
     STATIC_ROOT = os.path.join(BASE_DIR, "..", "public", "static")
 
+    MEDIA_ROOT = os.path.join(BASE_DIR, "..", "public", "media")
+
+    MEDIA_URL = '/media/'
+
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
