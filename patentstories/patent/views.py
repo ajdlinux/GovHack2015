@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from .models import PatentApplication
+from .models import PatentApplication, PatentAnnotation
 from .forms import AddAnnotationForm
 
 def view_patent(request, patent_id):
@@ -38,6 +38,15 @@ def add_annotation(request, patent_id):
     if request.method == 'POST':
         form = AddAnnotationForm(request.POST)
         if form.is_valid():
+            annotation = PatentAnnotation()
+            annotation.patent_application = PatentApplication.objects.get(pk=patent_id)
+            annotation.annotation_type = request.POST['annotation_type']
+            annotation.body = request.POST['body']
+            annotation.date = request.POST['date']
+            annotation.link = request.POST['link']
+            annotation.link_other = request.POST['link_other']
+
+            annotation.save()
             return HttpResponseRedirect(reverse('patent', args=(patent_id,)))
     else:
         form = AddAnnotationForm()

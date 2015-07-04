@@ -5,7 +5,9 @@
 
 {% block content %}
     <form method="POST">
+    {% csrf_token %}
     {% bootstrap_form_errors form %}
     {% bootstrap_form form %}
+    {% bootstrap_button "Submit" %}
     </form>
 {% endblock %}
