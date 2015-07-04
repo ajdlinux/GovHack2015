@@ -1,1 +1,9 @@
 {% extends "site_base.html" %}
+
+{% block title %}Patent #{{ patent.patent_id }} - {{ patent.description }}{% endblock %}
+
+{% block content %}
+
+    <h1>Patent #{{ patent.patent_id }} - {{ patent.description }}</h1>
+
+{% endblock %}
