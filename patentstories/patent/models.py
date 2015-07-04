@@ -67,8 +67,8 @@ class PatentApplication(models.Model):
 
         for annotation in annotations:
             if not annotation.date:
-                patent_data[annotation.event] = {
-                    'event': PatentAnnotationTypes.label(annotation.annotation_type),
+                patent_data[PatentAnnotationTypes.label(annotation.annotation_type)] = {
+                    'annotation_type': PatentAnnotationTypes.label(annotation.annotation_type),
                     'date': annotation.date,
                     'creator': annotation.creator,
                     'title': annotation.title,
@@ -78,6 +78,9 @@ class PatentApplication(models.Model):
                 }
 
         return patent_data
+
+    def __repr__(self):
+        return u'Patent application #{0}'.format(self.australian_appl_no)
 
 
 class PatentAnnotationTypes(enum.Enum):

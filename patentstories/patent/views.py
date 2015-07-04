@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from .models import PatentApplication
 from .mongo_adapters.event_glyph import EVENT_GLYPH_SET
+from .forms import AddAnnotationForm
 
 def view_patent(request, patent_id):
     """
@@ -26,6 +29,21 @@ def view_patent(request, patent_id):
     glyphify(patent_data['timeline'])
     return render(request, 'patent/patent.html', patent_data)
 
+
+def add_annotation(request, patent_id):
+    """
+    View to process annotation form
+    :param request: Django request object
+    :param patent_id: patent application number
+    :return: Django response object
+    """
+    if request.method == 'POST':
+        form = AddAnnotationForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect(reverse('patent', args=(patent_id,)))
+    else:
+        form = AddAnnotationForm()
+    return render(request, 'patent/add_annotation.html', {'form': form})
 
 
 def dummy_patent(request, patent_id):

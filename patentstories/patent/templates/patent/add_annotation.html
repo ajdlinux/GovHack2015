@@ -1,0 +1,11 @@
+{% extends "site_base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Patent - Add Annotation{% endblock %}
+
+{% block content %}
+    <form method="POST">
+    {% bootstrap_form_errors form %}
+    {% bootstrap_form form %}
+    </form>
+{% endblock %}
