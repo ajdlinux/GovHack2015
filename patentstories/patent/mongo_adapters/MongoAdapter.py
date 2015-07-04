@@ -12,9 +12,9 @@ class MongoAdapter():
         """
 
         :param collection: collection/database of event object
-        :type: str
+        :type collection: str
         :param patent_application_no: application number
-        :type: str
+        :type patent_application_no: str
         :return:
         """
 
@@ -70,6 +70,7 @@ class MongoAdapter():
         """
         Return the date of an event in the record
         :param event_name: name of event
+        :type event_name: str
         :return: date of event
         :rtype: datetime
         """
@@ -103,9 +104,9 @@ class MongoAdapter():
         Using a dict in the format of {"eventname": ("nice name", ["data"]}, build the list of events using the provided
         document
         :param event_document: event document retrieved from mongodb
-        :type: dict
+        :type event_document: dict
         :param event_list:
-        :type: dict
+        :type event_list: dict
         :return: event list
         :rtype: list
         """

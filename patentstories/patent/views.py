@@ -79,7 +79,7 @@ def glyphify(timeline):
     """
     Add glyph annotations to timeline items
     :param timeline: timeline object
-    :type: list
+    :type timeline: list
     """
     for event in timeline:
         if 'event_type' in event:

@@ -1,10 +1,13 @@
 __author__ = 'Benjamin George Roberts <benjamin.roberts@anu.edu.au>'
 
+from ..models import PatentApplication
+
 class ExternalAdapter():
 
     def __init__(self, parent_patent):
         """
         :param parent_patent:
+        :type parent_patent: PatentApplication
         :return:
         """
         self.patent = parent_patent
