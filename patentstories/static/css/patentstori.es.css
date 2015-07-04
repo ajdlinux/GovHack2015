@@ -1,0 +1,27 @@
+.navbar-brand {
+    height: 60px;
+}
+
+.navbar-nav>li>a {
+    padding: 20px;
+}
+
+body {
+    padding-top: 60px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. */
+}
+
+.hero-spacer {
+    margin-top: 50px;
+}
+
+.hero-feature {
+    margin-bottom: 30px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.navbar-collapse>div {
+    padding: 5px;
+}

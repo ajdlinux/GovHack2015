@@ -4,17 +4,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="patentstori.es allows you to explore and annotate hundreds of thousands of Australian patent records">
+    <meta name="author" content="patentstori.es team">
+
     <title>patentstori.es - {% block title %}{% endblock %}</title>
+
     {% bootstrap_css %}
-    {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/patentstori.es.css" %}">
+
+    {% bootstrap_javascript jquery=1 %}
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="{% static "patentstori.es_logo_32pxh.png" %}" alt="patentstori.es" /></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Explore</a>
+                    </li>
+                    <li>
+                        <a href="/contact/">Contact</a>
+                    </li>
+                </ul>
+                <div class="col-sm-3 col-md-3 pull-right">
+                    <form class="navbar-form" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Patent number..." name="srch-term"
+                                   id="srch-term">
 
-<img src="{% static "patentstori.es_logo_32pxh.png" %}" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
+
+
+    <!-- Page Content -->
+    <div class="container">
 {% bootstrap_messages %}
+        {% block content %}Lorem ipsum{% endblock %}
 
-<p>{% block content %}Lorem ipsum{% endblock %}</p>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; 2015 Patent Trolls. A <a href="http://govhack.org">GovHack 2015</a> project. <a href="https://github.com/ajdlinux/GovHack2015">Source code on GitHub.</a> Made in Canberra using 100% recycled electrons.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+
+
+
+
 
 </body>
 </html>
