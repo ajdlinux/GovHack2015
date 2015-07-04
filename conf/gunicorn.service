@@ -8,6 +8,7 @@ PIDFile=/tmp/gunicorn.pid
 User=govhack
 Group=govhack
 WorkingDirectory=/srv/patentstori.es/patentstories
+EnvironmentFile=/srv/patentstori.es/conf/environment
 ExecStart=/usr/local/bin/gunicorn --pid /tmp/gunicorn.pid patentstories.wsgi:application
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
