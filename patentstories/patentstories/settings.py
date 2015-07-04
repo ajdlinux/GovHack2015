@@ -36,6 +36,8 @@ class Base(Configuration):
         'django.contrib.flatpages',
         'bootstrap3',
         'raven.contrib.django.raven_compat',
+        'home',
+        'patent',
     )
 
     MIDDLEWARE_CLASSES = (
