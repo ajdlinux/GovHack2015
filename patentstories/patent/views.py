@@ -21,8 +21,8 @@ def view_patent(request, patent_id):
         else:
             raise Exception # TODO fix this
 
-    timeline = patent_application.get_combined_timeline()
-    return render(request, 'patent/patent.html', {'patent': patent_application, 'timeline': timeline})
+    patent_data = patent_application.get_patent_data()
+    return render(request, 'patent/patent.html', patent_data)
 
 
 

@@ -42,26 +42,41 @@ class PatentApplication(models.Model):
 
         return self.timeline
 
-    def get_combined_timeline(self):
+    def get_patent_data(self):
         """
-        Build a combined timeline consisting of the events from the IPGOD database and the user annotations.
-        :return: list of event objects
-        :rtype: list
+        Build a dictionary with a combined timeline consisting of the events from the IPGOD database and the user
+        annotations, and data fields from external sources
+        :return: dictionary containing patent data
+        :rtype: dict
         """
-        timeline = self.get_event_timeline()
+        patent_data = {'patent': self, 'timeline': self.get_event_timeline()}
         annotations = self.patentannotation_set.all()
         for annotation in annotations:
-            timeline.append({
-                'event': PatentAnnotationTypes.label(annotation.annotation_type),
-                'date': annotation.date,
-                'creator': annotation.creator,
-                'title': annotation.title,
-                'body': annotation.body,
-                'link': annotation.link,
-                'link_other': annotation.link_other,
-            })
-        timeline.sort(key=lambda x: x['date'] if x['date'] else datetime.datetime.min)
-        return timeline
+            if annotation.date:
+                patent_data['timeline'].append({
+                    'event': PatentAnnotationTypes.label(annotation.annotation_type),
+                    'date': annotation.date,
+                    'creator': annotation.creator,
+                    'title': annotation.title,
+                    'body': annotation.body,
+                    'link': annotation.link,
+                    'link_other': annotation.link_other,
+                })
+        patent_data['timeline'].sort(key=lambda x: x['date'] if x['date'] else datetime.datetime.min)
+
+        for annotation in annotations:
+            if not annotation.date:
+                patent_data[annotation.event] = {
+                    'event': PatentAnnotationTypes.label(annotation.annotation_type),
+                    'date': annotation.date,
+                    'creator': annotation.creator,
+                    'title': annotation.title,
+                    'body': annotation.body,
+                    'link': annotation.link,
+                    'link_other': annotation.link_other,
+                }
+
+        return patent_data
 
 
 class PatentAnnotationTypes(enum.Enum):
