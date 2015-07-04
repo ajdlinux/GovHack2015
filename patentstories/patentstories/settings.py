@@ -21,6 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class Base(Configuration):
     ALLOWED_HOSTS = []
 
+    SITE_ID = 1
 
     # Application definition
 
@@ -31,6 +32,8 @@ class Base(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'django.contrib.sites',
+        'django.contrib.flatpages',
     )
 
     MIDDLEWARE_CLASSES = (
@@ -42,6 +45,7 @@ class Base(Configuration):
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'django.middleware.security.SecurityMiddleware',
+        'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     )
 
     ROOT_URLCONF = 'patentstories.urls'
