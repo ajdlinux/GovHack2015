@@ -3,12 +3,12 @@ __author__ = 'Benjamin George Roberts <benjamin.roberts@anu.edu.au>'
 from preprocessing.MongoSingleton import MongoSingleton
 from datetime import datetime
 
-PK_NAME = "australian_appl_no"
 
 class MongoAdapter():
     DATE_NOT_AVAILABLE = datetime.strptime("12/31/2999","%m/%d/%Y")
 
-    def __init__(self, collection, patent_application_no):
+
+    def __init__(self, collection, patent_application_no, **kwargs):
         """
 
         :param collection: collection/database of event object
@@ -17,9 +17,21 @@ class MongoAdapter():
         :type: str
         :return:
         """
+
+        if "pk_name" in kwargs:
+            self.pk_name = kwargs["pk_name"]
+        else:
+            self.pk_name = "australian_appl_no"
+
+
         self.__collection__ = MongoSingleton.get_db()[collection]
+
         #TODO is PK actually a unique key?
-        self.__record__ = self.__collection__.find_one({PK_NAME: patent_application_no})
+        self.__record__ = self.__collection__.find_one({self.pk_name: patent_application_no})
+
+        #lowercase all keys and remove " chars (IPGOD108)
+        if self.__record__ is not None:
+            self.__record__ = {key.lower().replace('"', ''): value for key,value in self.__record__.items()}
 
     def exists(self):
         """
@@ -44,7 +56,7 @@ class MongoAdapter():
         :return: patent no
         :rtype: int
         """
-        return self.__record__[PK_NAME]
+        return self.__record__[self.pk_name.lower()]
 
     def get_mongo_record(self):
         """
@@ -70,7 +82,6 @@ class MongoAdapter():
                 return None
 
         date_str = self.__record__[event_key]
-        print(date_str)
         date = datetime.strptime(date_str.split(' ')[0], "%m/%d/%Y")
 
         # check for bogus date
