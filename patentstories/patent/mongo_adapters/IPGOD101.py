@@ -1,8 +1,8 @@
 __author__ = 'Benjamin George Roberts <benjamin.roberts@anu.edu.au>'
 
-from .mongo_parent_events import MongoPatentEventAdapter
+from .MongoAdapter import MongoAdapter
 
-class IPGOD101Adapter(MongoPatentEventAdapter):
+class IPGOD101Adapter(MongoAdapter):
 
     def __init__(self, patent_application_no):
         super(IPGOD101Adapter,self ).__init__("IPGOD101", patent_application_no)

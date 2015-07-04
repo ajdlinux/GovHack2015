@@ -5,7 +5,7 @@ from datetime import datetime
 
 PK_NAME = "australian_appl_no"
 
-class MongoPatentEventAdapter():
+class MongoAdapter():
 
     def __init__(self, collection, patent_application_no):
         """

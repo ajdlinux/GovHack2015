@@ -1,7 +1,7 @@
 from django.db import models
-from .mongo_events.IPGOD101 import IPGOD101Adapter
+from .mongo_adapters.IPGOD101 import IPGOD101Adapter
 from django.core.exceptions import ValidationError
-from .mongo_events import MONGO_PATENT_EVENT_ADAPTERS
+from .mongo_adapters import MONGO_PATENT_EVENT_ADAPTERS
 
 class PatentApplication(models.Model):
     """
