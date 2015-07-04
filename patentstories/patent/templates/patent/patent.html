@@ -15,7 +15,7 @@
     <li class="timeline-add"><div class="timeline-badge-mini success"><a href="annotate"><i class="glyphicon glyphicon-plus"></i></a></div></li>
     {% for event in timeline %}
         <li{% cycle '' ' class="timeline-inverted"' %}>
-            <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+            <div class="timeline-badge {{ event.catagory }}"><i class="glyphicon {{ event.glyph }}"></i></div>
             <div class="timeline-panel">
                 <h4 class="timeline-title">{% if event.event %}{{ event.event }}{% else %}{{ event.annotation_type }}{% endif %}{% if event.title %} - {{ event.title }}{% endif %}</h4>
                 <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ event.date }}</small></p>

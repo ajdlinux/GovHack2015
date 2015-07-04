@@ -122,6 +122,7 @@ class MongoAdapter():
             event = {
                 "date": date,
                 "event": event_nice,
+                "event_type": event_name,
                 "information": [self.__record__[data] for data in event_data if data in self.__record__]
             }
 

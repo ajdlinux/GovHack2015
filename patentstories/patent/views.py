@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from .models import PatentApplication, PatentAnnotation
+from .mongo_adapters.event_glyph import EVENT_GLYPH_SET
 from .forms import AddAnnotationForm
 
 def view_patent(request, patent_id):
@@ -25,6 +26,7 @@ def view_patent(request, patent_id):
             raise Exception # TODO fix this
 
     patent_data = patent_application.get_patent_data()
+    glyphify(patent_data['timeline'])
     return render(request, 'patent/patent.html', patent_data)
 
 
@@ -61,3 +63,14 @@ def dummy_patent(request, patent_id):
     }, None, None, None, None]
     context = {'patent': patent, 'timeline': timeline}
     return render(request, 'patent/patent.html', context)
+
+def glyphify(timeline):
+    """
+    Add glyph annotations to timeline items
+    :param timeline: timeline object
+    :type: list
+    """
+    for event in timeline:
+        glyph, catagory = EVENT_GLYPH_SET[event["event_type"]]
+        event["glyph"] = glyph
+        event["catagory"] = catagory
