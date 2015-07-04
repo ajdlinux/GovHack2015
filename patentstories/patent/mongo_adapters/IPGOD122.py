@@ -21,7 +21,7 @@ class IPGOD122Adapter(MongoAdapter):
 
     def get_events(self):
         """
-        Get events available in IPGOD109 entry
+        Get events available in IPGOD122 entry
         :return: list of events:rtype: list
         """
         return self.process_events_list(EVENT_FIELDS)
