@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 def dummy_patent(request, patent_id):
-    patent = {'patent_id': patent_id, 'description': 'A patent on a really cool thing'}
+    patent = {'patent_id': patent_id.upper(), 'description': 'A patent on a really cool thing'}
     timeline = [{
         'title': 'bananas on toast',
         'date': '25th September 2014',
