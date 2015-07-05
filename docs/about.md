@@ -8,9 +8,9 @@ By cross referencing the National Library's Trove database [[3]] for relevant so
 # Datasets We Use
 Our primary source is the extensive IPGOD [[1]] dataset. This is used to identify patent applications and generate a visual timeline of the patents application process and history. This has also been used as part of short statistical [analysis][5].
 
-Further information about a particular patent, including its supporting documentation and extract, are extracted from IP Australia's AusPat frontend [6].
+Further information about a particular patent, including its supporting documentation and extract, are extracted from IP Australia's AusPat frontend [[6]].
 
-The National Library's Trove [3] is queried for images, articles and publications relevant to the patent application and provides the opportunity for users to further explore the particular innovation.
+The National Library's Trove [[3]] is queried for images, articles and publications relevant to the patent application and provides the opportunity for users to further explore the particular innovation.
 
 # Who Are We?
 
