@@ -44,6 +44,7 @@ def add_annotation(request, patent_id):
             annotation = PatentAnnotation()
             annotation.patent_application = PatentApplication.objects.get(pk=patent_id)
             annotation.annotation_type = form.cleaned_data['annotation_type']
+            annotation.title = form.cleaned_data['title']
             annotation.body = form.cleaned_data['body']
             annotation.date = form.cleaned_data['date']
             annotation.link = form.cleaned_data['link']
