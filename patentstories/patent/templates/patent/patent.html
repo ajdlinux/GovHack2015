@@ -1,10 +1,10 @@
 {% extends "site_base.html" %}
 
-{% block title %}Patent #{{ patent.australian_appl_no }} - {{ patent.description }}{% endblock %}
+{% block title %}Patent #{{ patent.australian_appl_no }}{% if auspat.title %} - {{ auspat.title }}{% endif %}{% endblock %}
 
 {% block content %}
     {% autoescape on %}
-    <h1>Patent #{{ patent.australian_appl_no }} - {{ patent.description }}</h1>
+    <h1>Patent #{{ patent.australian_appl_no }}{% if auspat.title %} - {{ auspat.title }}{% endif %}</h1>
 
     {% if Summary %}
         <h2>Summary - {{ Summary.title }}</h2>
@@ -12,6 +12,28 @@
     {% endif %}
 
     <ul class="timeline">
+
+    {% if auspat %}
+    <li>
+        <div class="timeline-badge success"><i class="glyphicon glyphicon-asterisk"></i></div>
+        <div class="timeline-panel">
+            <h4 class="timeline-title">
+                <a href="http://pericles.ipaustralia.gov.au/ols/auspat/applicationDetails.do?applicationNo={{ patent.australian_appl_no }}">AusPat Database Information</a>
+            </h4>
+
+            <div class="timeline-body">
+                <ul>
+                    {% if auspat.title %}<li><b>Title:</b> {{ auspat.title }}</li>{% endif %}
+                    {% if auspat.applicant %}<li><b>Applicant:</b> {{ auspat.applicant }}</li>{% endif %}
+                    {% if auspat.inventor and auspat.inventor.0 %}<li><b>Inventors:</b><ul>{% for inventor in auspat.inventor %}<li>{{ inventor }}</li></ul></li>{% endfor %}{% endif %}
+                    {% if auspat.extract %}<li><b>Extract:</b> <a href="{{ auspat.extract }}">{{ auspat.extract }}</a></li>{% endif %}
+                    {% if auspat.specifications %}<li><b>Specifications:</b><ul>{% for spec, link in auspat.specifications.items %}<li><a href="{{ link }}">{{ spec }}</a></li>{% endfor %}</ul></li>{% endif %}
+                </ul>
+            </div>
+        </div>
+    </li>
+    {% endif %}
+
     <li class="timeline-add"><div class="timeline-badge-mini success"><a href="annotate"><i class="glyphicon glyphicon-plus"></i></a></div></li>
     {% for event in timeline %}
         <li{% cycle '' ' class="timeline-inverted"' %}>
