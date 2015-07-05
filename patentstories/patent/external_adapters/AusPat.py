@@ -106,11 +106,12 @@ class AusPatAdapter(ExternalAdapter):
             fields["inventor"] = []
             #go up a level to find inventor list, skip title elem
             for inventor_elem in inventors_elem.parent()[1:]:
-                # Make name more "intimate"
-                inventor_name = inventor_elem.text.strip()
-                inventor_name = " ".join(reversed(inventor_name.split(", ")))
+                for inventor in inventor_elem.text.strip().split(';'):
+                    # Make name more "intimate"
+                    inventor_name = inventor.strip()
+                    inventor_name = " ".join(reversed(inventor_name.split(", ")))
 
-                fields["inventor"].append(inventor_name)
+                    fields["inventor"].append(inventor_name)
 
         # Patent Applicant
         applicant_title_elem = bs.find(

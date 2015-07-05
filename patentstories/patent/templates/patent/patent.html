@@ -27,7 +27,7 @@
                     <ul>
                         {% if auspat.title %}<li><b>Title:</b> {{ auspat.title }}</li>{% endif %}
                         {% if auspat.applicant %}<li><b>Applicant:</b> {{ auspat.applicant }}</li>{% endif %}
-                        {% if auspat.inventor and auspat.inventor.0 %}<li><b>Inventors:</b><ul>{% for inventor in auspat.inventor %}<li>{{ inventor }}</li></ul></li>{% endfor %}{% endif %}
+                        {% if auspat.inventor and auspat.inventor.0 %}<li><b>Inventors:</b><ul>{% for inventor in auspat.inventor %}<li>{{ inventor }}</li>{% endfor %}</ul></li>{% endif %}
                         {% if auspat.extract %}<li><b>Extract:</b> <a href="{{ auspat.extract }}">{{ auspat.extract }}</a></li>{% endif %}
                         {% if auspat.specifications %}<li><b>Specifications:</b><ul>{% for spec, link in auspat.specifications.items %}<li><a href="{{ link }}">{{ spec }}</a></li>{% endfor %}</ul></li>{% endif %}
                     </ul>
