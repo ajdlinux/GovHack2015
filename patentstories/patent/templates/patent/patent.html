@@ -33,6 +33,8 @@
                     {% endif %}
                     {% if event.image %}
                         <p><img src="{{ event.image.url }}" alt="{{ event.image_alt }}"></p>
+                    {% else %}
+                        NO IMAGE TO DISPLAY
                     {% endif %}
                     <p>{{ event.body }}</p>
                 </div>
