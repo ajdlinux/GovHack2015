@@ -39,7 +39,7 @@ def add_annotation(request, patent_id):
     :return: Django response object
     """
     if request.method == 'POST':
-        form = AddAnnotationForm(request.POST)
+        form = AddAnnotationForm(request.POST, request.FILES)
         if form.is_valid():
             annotation = PatentAnnotation()
             annotation.patent_application = PatentApplication.objects.get(pk=patent_id)

@@ -4,7 +4,7 @@
 {% block title %}Patent - Add Annotation{% endblock %}
 
 {% block content %}
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form_errors form %}
     {% bootstrap_form form %}
