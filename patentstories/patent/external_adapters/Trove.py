@@ -13,7 +13,7 @@ TROVE_RELEVANCE_FILTER = lambda w: w.relevance.text == TROVE_RELEVANCE
 TROVE_RECORD_TAKE = 3
 
 class TroveAdapter(ExternalAdapter):
-    def __init__(self, parent_patent, *from ):
+    def __init__(self, parent_patent, *args):
         """
         :param parent_patent: parent patent model
         :type parent_patent: PatentApplication
