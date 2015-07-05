@@ -38,11 +38,16 @@ def add_annotation(request, patent_id):
     :param patent_id: patent application number
     :return: Django response object
     """
+    try:
+        patent_application = PatentApplication.objects.get(pk=patent_id)
+    except PatentApplication.DoesNotExist:
+        return HttpResponseRedirect(reverse('patent', args=(patent_id,)))
+
     if request.method == 'POST':
         form = AddAnnotationForm(request.POST, request.FILES)
         if form.is_valid():
             annotation = PatentAnnotation()
-            annotation.patent_application = PatentApplication.objects.get(pk=patent_id)
+            annotation.patent_application = patent_application
             annotation.annotation_type = form.cleaned_data['annotation_type']
             annotation.title = form.cleaned_data['title']
             annotation.body = form.cleaned_data['body']
