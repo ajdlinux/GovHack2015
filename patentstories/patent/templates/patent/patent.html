@@ -1,5 +1,6 @@
 {% extends "site_base.html" %}
-
+{% load bootstrap3 %}
+{% load staticfiles %}
 {% block title %}Patent #{{ patent.australian_appl_no }}{% if auspat.title %} - {{ auspat.title }}{% endif %}{% endblock %}
 
 {% block content %}
@@ -12,31 +13,62 @@
     {% endif %}
 
     <ul class="timeline">
-
+    {% cycle ' class="timeline-inverted"' '' as timeline_class silent%}
     {% if auspat %}
-    <li>
-        <div class="timeline-badge success"><i class="glyphicon glyphicon-asterisk"></i></div>
-        <div class="timeline-panel">
-            <h4 class="timeline-title">
-                <a href="http://pericles.ipaustralia.gov.au/ols/auspat/applicationDetails.do?applicationNo={{ patent.australian_appl_no }}">AusPat Database Information</a>
-            </h4>
+        {% cycle timeline_class %}
+        <li{{ timeline_class }}>
+            <div class="timeline-badge success"><i class="glyphicon glyphicon-asterisk"></i></div>
+            <div class="timeline-panel">
+                <h4 class="timeline-title">
+                    <a href="http://pericles.ipaustralia.gov.au/ols/auspat/applicationDetails.do?applicationNo={{ patent.australian_appl_no }}">AusPat Database Information</a>
+                </h4>
 
-            <div class="timeline-body">
-                <ul>
-                    {% if auspat.title %}<li><b>Title:</b> {{ auspat.title }}</li>{% endif %}
-                    {% if auspat.applicant %}<li><b>Applicant:</b> {{ auspat.applicant }}</li>{% endif %}
-                    {% if auspat.inventor and auspat.inventor.0 %}<li><b>Inventors:</b><ul>{% for inventor in auspat.inventor %}<li>{{ inventor }}</li></ul></li>{% endfor %}{% endif %}
-                    {% if auspat.extract %}<li><b>Extract:</b> <a href="{{ auspat.extract }}">{{ auspat.extract }}</a></li>{% endif %}
-                    {% if auspat.specifications %}<li><b>Specifications:</b><ul>{% for spec, link in auspat.specifications.items %}<li><a href="{{ link }}">{{ spec }}</a></li>{% endfor %}</ul></li>{% endif %}
-                </ul>
+                <div class="timeline-body">
+                    <ul>
+                        {% if auspat.title %}<li><b>Title:</b> {{ auspat.title }}</li>{% endif %}
+                        {% if auspat.applicant %}<li><b>Applicant:</b> {{ auspat.applicant }}</li>{% endif %}
+                        {% if auspat.inventor and auspat.inventor.0 %}<li><b>Inventors:</b><ul>{% for inventor in auspat.inventor %}<li>{{ inventor }}</li></ul></li>{% endfor %}{% endif %}
+                        {% if auspat.extract %}<li><b>Extract:</b> <a href="{{ auspat.extract }}">{{ auspat.extract }}</a></li>{% endif %}
+                        {% if auspat.specifications %}<li><b>Specifications:</b><ul>{% for spec, link in auspat.specifications.items %}<li><a href="{{ link }}">{{ spec }}</a></li>{% endfor %}</ul></li>{% endif %}
+                    </ul>
+                    <p><small class="text-muted">Data sourced from the <a href="http://pericles.ipaustralia.gov.au/ols/auspat/applicationDetails.do?applicationNo={{ patent.australian_appl_no }}">IP Australia AusPat Database</a></small></p>
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
+    {% endif %}
+
+    {% if trove %}
+        {% cycle timeline_class %}
+        <li{{ timeline_class }}>
+            <div class="timeline-badge success"><i class="glyphicon glyphicon-asterisk"></i></div>
+            <div class="timeline-panel">
+                <h4 class="timeline-title">
+                    <a href="http://pericles.ipaustralia.gov.au/ols/auspat/applicationDetails.do?applicationNo={{ patent.australian_appl_no }}">Relevant media from Trove</a>
+                </h4>
+
+                <div class="timeline-body">
+                    <ul>
+                        {% for newspaper_article in trove.newspaper %}
+                            <li><b>News article:</b> <a href="{{ newspaper_article.url }}">{{ newspaper_article.title }}</a></li>
+                        {% endfor %}
+                        {% for article in trove.article %}
+                            <li><b>Article:</b> <a href="{{ article.url }}">{{ article.title }}</a></li>
+                        {% endfor %}
+                        {% for picture in trove.picture %}
+                            <li><b>Picture:</b> <a href="{{ picture.url }}">{{ picture.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <p><small class="text-muted">Data sourced from <a href="http://trove.nla.gov.au/">Trove</a>, a service of the <a href="http://nla.gov.au">National Library of Australia</a></small></p>
+                    <a href="http://trove.nla.gov.au"><img src="{% static "trove-API-light.png" %}" alt="Powered by Trove"></a>
+                </div>
+            </div>
+        </li>
     {% endif %}
 
     <li class="timeline-add"><div class="timeline-badge-mini success"><a href="annotate"><i class="glyphicon glyphicon-plus"></i></a></div></li>
     {% for event in timeline %}
-        <li{% cycle '' ' class="timeline-inverted"' %}>
+        {% cycle timeline_class %}
+        <li{{ timeline_class }}>
             <div class="timeline-badge {{ event.catagory }}"><i class="glyphicon {{ event.glyph }}"></i></div>
             <div class="timeline-panel">
                 <h4 class="timeline-title">

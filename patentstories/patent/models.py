@@ -51,10 +51,20 @@ class PatentApplication(models.Model):
                 cached = ExternalCachedData.objects.get(patent_application=self, adapter_code=external_adapter_code)
                 external_data[external_adapter_code] = cached.data
             except ExternalCachedData.DoesNotExist:
-                external_data[external_adapter_code] = external_adapter(self).get_items()
+                if external_adapter_code == 'trove':
+                    title = external_data['auspat'].get('title', '')
+                    applicant = external_data['auspat'].get('applicant', '')
+                    inventors = external_data['auspat'].get('inventors', [])
+
+                    external_data[external_adapter_code] = external_adapter(self, title, applicant, *inventors).get_items()
+
+                else:
+                    external_data[external_adapter_code] = external_adapter(self).get_items()
                 cached = ExternalCachedData(patent_application=self, adapter_code=external_adapter_code)
                 cached.data = external_data[external_adapter_code]
                 cached.save()
+            if type(external_data[external_adapter_code]) == dict and not any(external_data[external_adapter_code].values()):
+                del external_data[external_adapter_code]
         return external_data
 
     def get_patent_data(self):
