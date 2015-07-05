@@ -43,11 +43,13 @@ def add_annotation(request, patent_id):
         if form.is_valid():
             annotation = PatentAnnotation()
             annotation.patent_application = PatentApplication.objects.get(pk=patent_id)
-            annotation.annotation_type = request.POST['annotation_type']
-            annotation.body = request.POST['body']
-            annotation.date = request.POST['date']
-            annotation.link = request.POST['link']
-            annotation.link_other = request.POST['link_other']
+            annotation.annotation_type = form.cleaned_data['annotation_type']
+            annotation.body = form.cleaned_data['body']
+            annotation.date = form.cleaned_data['date']
+            annotation.link = form.cleaned_data['link']
+            annotation.link_other = form.cleaned_data['link_other']
+            annotation.image = form.cleaned_data['image']
+            annotation.image_alt = form.cleaned_data['image_alt']
 
             annotation.save()
             return HttpResponseRedirect(reverse('patent', args=(patent_id,)))
