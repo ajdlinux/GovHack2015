@@ -39,7 +39,7 @@ class AusPatAdapter(ExternalAdapter):
         #TODO implement caching here
         if self.fields is None:
             self.fields = AusPatAdapter.__scrape_auspat_response(self.get_response())
-        return [self.fields]
+        return self.fields
 
     def __load_page__(self):
         """
