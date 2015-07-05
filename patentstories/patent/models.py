@@ -2,6 +2,7 @@ import datetime
 from django.conf import settings
 from django.db import models
 from django_enumfield import enum
+from jsonfield import JSONField
 from .mongo_adapters import MONGO_PATENT_EVENT_ADAPTERS
 from .external_adapters import EXTERNAL_PATENT_EVENT_ADAPTERS
 
@@ -43,6 +44,19 @@ class PatentApplication(models.Model):
 
         return self.timeline
 
+    def get_external_data(self):
+        external_data = {}
+        for external_adapter_code, external_adapter in EXTERNAL_PATENT_EVENT_ADAPTERS.items():
+            try:
+                cached = ExternalCachedData.objects.get(patent_application=self, adapter_code=external_adapter_code)
+                external_data[external_adapter_code] = cached.data
+            except ExternalCachedData.DoesNotExist:
+                external_data[external_adapter_code] = external_adapter(self).get_items()
+                cached = ExternalCachedData(patent_application=self, adapter_code=external_adapter_code)
+                cached.data = external_data[external_adapter_code]
+                cached.save()
+        return external_data
+
     def get_patent_data(self):
         """
         Build a dictionary with a combined timeline consisting of the events from the IPGOD database and the user
@@ -80,6 +94,10 @@ class PatentApplication(models.Model):
                     'image': annotation.image,
                     'image_alt': annotation.image_alt,
                 }
+
+        external_data = self.get_external_data()
+        for external_adapter_code, external_data in external_data.items():
+            patent_data[external_adapter_code] = external_data
 
         return patent_data
 
@@ -131,3 +149,11 @@ class FeaturedStory(models.Model):
     image = models.ImageField(upload_to='featured/')
     image_alt = models.CharField(max_length=100)
     enabled = models.BooleanField(default=True)
+
+class ExternalCachedData(models.Model):
+    """
+    Cache details from external data source
+    """
+    patent_application = models.ForeignKey('PatentApplication')
+    adapter_code = models.CharField(max_length=16)
+    data = JSONField()
