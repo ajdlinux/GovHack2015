@@ -9,6 +9,7 @@ ANNOTATION_GLYPH_SET = defaultdict(lambda: ('info', 'glyphicon-question-sign'))
 __GLYPH_SET__ = {
 
     'Link': ('glyphicon-link', 'info'),
+    'Picture': ('glyphicon-picture', 'info'),
 
 }
 
