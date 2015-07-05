@@ -1,6 +1,5 @@
 __author__ = 'Benjamin George Roberts <benjamin.roberts@anu.edu.au>'
 
-from ..models import PatentApplication
 
 class ExternalAdapter():
 

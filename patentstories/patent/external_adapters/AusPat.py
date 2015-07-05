@@ -2,7 +2,6 @@ __author__ = 'Benjamin George Roberts <benjamin.roberts@anu.edu.au>'
 
 import requests
 from .ExternalAdapter import ExternalAdapter
-from ..models import PatentApplication
 from requests import Response
 from bs4 import BeautifulSoup
 
