@@ -67,20 +67,21 @@ class PatentApplication(models.Model):
         patent_data = {'patent': self, 'timeline': self.get_event_timeline()}
         annotations = self.patentannotation_set.all()
         for annotation in annotations:
-            if annotation.date:
-                patent_data['timeline'].append({
-                    'annotation_type': PatentAnnotationTypes.label(annotation.annotation_type),
-                    'date': annotation.date,
-                    'creator': annotation.creator,
-                    'title': annotation.title,
-                    'body': annotation.body,
-                    'link': annotation.link,
-                    'link_other': annotation.link_other,
-                    'image': annotation.image,
-                    'image_alt': annotation.image_alt,
-                })
-        patent_data['timeline'].sort(key=lambda x: x['date'] if x['date'] else datetime.datetime.min)
+            #if annotation.date:
+            patent_data['timeline'].append({
+                'annotation_type': PatentAnnotationTypes.label(annotation.annotation_type),
+                'date': annotation.date,
+                'creator': annotation.creator,
+                'title': annotation.title,
+                'body': annotation.body,
+                'link': annotation.link,
+                'link_other': annotation.link_other,
+                'image': annotation.image,
+                'image_alt': annotation.image_alt,
+            })
+        patent_data['timeline'].sort(key=lambda x: x['date'] if x['date'] else datetime.date.min)
 
+        """
         for annotation in annotations:
             if not annotation.date:
                 patent_data[PatentAnnotationTypes.label(annotation.annotation_type)] = {
@@ -94,7 +95,7 @@ class PatentApplication(models.Model):
                     'image': annotation.image,
                     'image_alt': annotation.image_alt,
                 }
-
+        """
         external_data = self.get_external_data()
         for external_adapter_code, external_data in external_data.items():
             patent_data[external_adapter_code] = external_data
