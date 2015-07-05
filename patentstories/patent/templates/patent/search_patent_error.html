@@ -1,0 +1,20 @@
+{% extends "site_base.html" %}
+{% block title %}Error{% endblock %}
+{% block content %}
+        <header class="jumbotron hero-spacer text-center">
+            <h1>We couldn't find your patent!</h1>
+            <p>Patent <b>{{ term }}</b> doesn't appear to exist. Please try another patent number.</p>
+
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Patent number..." name="srch-term"
+                           id="srch-term">
+
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </header>
+{% endblock %}

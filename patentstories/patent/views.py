@@ -23,7 +23,7 @@ def view_patent(request, patent_id):
             # patent has been found in IPGOD
             patent_application.save()
         else:
-            raise Exception # TODO fix this
+            return render(request, 'patent/search_patent_error.html', {'term': patent_id})
 
     patent_data = patent_application.get_patent_data()
     glyphify(patent_data['timeline'])
@@ -53,6 +53,26 @@ def add_annotation(request, patent_id):
     else:
         form = AddAnnotationForm()
     return render(request, 'patent/add_annotation.html', {'form': form})
+
+
+def search_patent(request):
+    """
+    View to search patent number
+    :param request: Django request object
+    :return:Django response object
+    """
+    patent_number = request.GET.get('srch-term', '').upper()
+    try:
+        patent_application = PatentApplication.objects.get(australian_appl_no=patent_number)
+        return HttpResponseRedirect(reverse('patent', args=(patent_number,)))
+    except PatentApplication.DoesNotExist:
+        patent_application = PatentApplication(australian_appl_no=patent_number)
+        event_timeline = patent_application.get_event_timeline()
+        if event_timeline:
+            # patent has been found in IPGOD
+            patent_application.save()
+        else:
+            return render(request, 'patent/search_patent_error.html', {'term': patent_number})
 
 
 def dummy_patent(request, patent_id):
