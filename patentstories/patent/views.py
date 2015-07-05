@@ -74,6 +74,7 @@ def search_patent(request):
         if event_timeline:
             # patent has been found in IPGOD
             patent_application.save()
+            return HttpResponseRedirect(reverse('patent', args=(patent_number,)))
         else:
             return render(request, 'patent/search_patent_error.html', {'term': patent_number})
 
