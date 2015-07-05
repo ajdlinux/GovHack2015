@@ -32,9 +32,7 @@
                         </ul>
                     {% endif %}
                     {% if event.image %}
-                        <p><img src="{{ event.image.url }}" alt="{{ event.image_alt }}"></p>
-                    {% else %}
-                        NO IMAGE TO DISPLAY
+                        <div><img src="{{ event.image.url }}" alt="{{ event.image_alt }}" class="img-thumbnail img-responsive"></div>
                     {% endif %}
                     <p>{{ event.body }}</p>
                 </div>
