@@ -14,6 +14,8 @@ def view_patent(request, patent_id):
     :param patent_id: patent application number
     :return: Django response object
     """
+    if not patent_id:
+        return HttpResponseRedirect(reverse('home'))
 
     try:
         patent_application = PatentApplication.objects.get(australian_appl_no=patent_id)
@@ -71,6 +73,9 @@ def search_patent(request):
     :return:Django response object
     """
     patent_number = request.GET.get('srch-term', '').upper()
+    if not patent_number:
+        return HttpResponseRedirect(reverse('home'))
+
     try:
         patent_application = PatentApplication.objects.get(australian_appl_no=patent_number)
         return HttpResponseRedirect(reverse('patent', args=(patent_number,)))
