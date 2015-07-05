@@ -1,4 +1,4 @@
-#IP Australia Government Open Data (IPGOD) Statistics
+#Intellectual Property Government Open Data (IPGOD) Statistics
 
 The IPGOD dataset provided by IP Australia [[1]] contains over 10 million entries detailing the life and states of Australian Patents. This dataset took over 2 hours to import and uses a staggering __20 gigabytes__ of disk space on our sever; the equivalent of 15,000 minutes of audio! Focusing on the __patents__ section of the dataset, we've crunched the numbers on some interesting statistics.
 
