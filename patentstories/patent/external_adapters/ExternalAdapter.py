@@ -13,9 +13,9 @@ class ExternalAdapter():
 
     def get_items(self):
         """
-        Retrieve the data from the external source and returns the entires in a list
+        Retrieve the data from the external source and returns the entires in a dict
         Is responsible for saving the corresponding models
-        :return: list of items
-        :rtype: list
+        :return: dict of items
+        :rtype: dict
         """
         pass
