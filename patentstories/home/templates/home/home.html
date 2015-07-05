@@ -32,6 +32,7 @@
         <div class="row text-center">
             {% for story in featured %}
                 <div class="col-md-3 col-sm-6 hero-feature">
+                    <a href="/patent/{{ story.patent_application.australian_appl_no }}/" style="height:100%;width:100%;display:block;">
                     <div class="thumbnail">
                         <img src="{{ story.image.url }}" alt="{{ story.image_alt }}">
 
@@ -39,12 +40,9 @@
                             <h3>{{ story.title }}</h3>
 
                             <p>{{ story.description }}</p>
-
-                            <p>
-                                <a href="/patent/{{ story.patent_application.australian_appl_no }}/" class="btn btn-primary">See more...</a>
-                            </p>
+                            <div class="btn btn-primary">See more...</div>
                         </div>
-                    </div>
+                    </div></a>
                 </div>
             {% endfor %}
         </div>{% endblock %}
