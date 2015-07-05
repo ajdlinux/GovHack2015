@@ -31,6 +31,9 @@
                             {% endfor %}
                         </ul>
                     {% endif %}
+                    {% if event.image %}
+                        <p><img src="{{ event.image.url }}" alt="{{ event.image_alt }}"></p>
+                    {% endif %}
                     <p>{{ event.body }}</p>
                 </div>
             </div>

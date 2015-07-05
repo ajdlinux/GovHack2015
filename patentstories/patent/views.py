@@ -47,7 +47,7 @@ def add_annotation(request, patent_id):
             annotation.body = form.cleaned_data['body']
             annotation.date = form.cleaned_data['date']
             annotation.link = form.cleaned_data['link']
-            annotation.link_other = form.cleaned_data['link_other']
+            # annotation.link_other = form.cleaned_data['link_other']
             annotation.image = form.cleaned_data['image']
             annotation.image_alt = form.cleaned_data['image_alt']
 
