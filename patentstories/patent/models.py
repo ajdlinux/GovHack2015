@@ -75,6 +75,8 @@ class PatentApplication(models.Model):
                     'body': annotation.body,
                     'link': annotation.link,
                     'link_other': annotation.link_other,
+                    'image': annotation.image,
+                    'image_alt': annotation.image_alt,
                 }
 
         return patent_data
