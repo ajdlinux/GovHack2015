@@ -62,6 +62,8 @@ class PatentApplication(models.Model):
                     'body': annotation.body,
                     'link': annotation.link,
                     'link_other': annotation.link_other,
+                    'image': annotation.image,
+                    'image_alt': annotation.image_alt,
                 })
         patent_data['timeline'].sort(key=lambda x: x['date'] if x['date'] else datetime.datetime.min)
 
