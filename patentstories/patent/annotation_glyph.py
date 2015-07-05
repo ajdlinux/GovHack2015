@@ -10,6 +10,9 @@ __GLYPH_SET__ = {
 
     'Link': ('glyphicon-link', 'info'),
     'Picture': ('glyphicon-picture', 'info'),
+    'Comment': ('glyphicon-comment', 'info'),
+    'News': ('glyphicon-list-alt', 'info'),
+    'Summary': ('glyphicon-list-alt', 'info'),
 
 }
 
