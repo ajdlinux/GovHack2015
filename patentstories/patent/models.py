@@ -55,7 +55,7 @@ class PatentApplication(models.Model):
         for annotation in annotations:
             if annotation.date:
                 patent_data['timeline'].append({
-                    'event': PatentAnnotationTypes.label(annotation.annotation_type),
+                    'annotation_type': PatentAnnotationTypes.label(annotation.annotation_type),
                     'date': annotation.date,
                     'creator': annotation.creator,
                     'title': annotation.title,
@@ -91,12 +91,14 @@ class PatentAnnotationTypes(enum.Enum):
     NEWS = 1
     COMMENT = 2
     PICTURE = 3
+    LINK = 4
 
     labels = {
         SUMMARY: 'Summary',
         NEWS: 'News Article',
         COMMENT: 'Comment',
         PICTURE: 'Picture',
+        LINK: 'Link',
     }
 
 class PatentAnnotation(models.Model):

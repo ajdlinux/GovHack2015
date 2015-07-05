@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from .models import PatentApplication, PatentAnnotation
 from .mongo_adapters.event_glyph import EVENT_GLYPH_SET
 from .forms import AddAnnotationForm
+from .annotation_glyph import ANNOTATION_GLYPH_SET
 
 def view_patent(request, patent_id):
     """
@@ -74,16 +75,6 @@ def search_patent(request):
         else:
             return render(request, 'patent/search_patent_error.html', {'term': patent_number})
 
-
-def dummy_patent(request, patent_id):
-    patent = {'patent_id': patent_id.upper(), 'description': 'A patent on a really cool thing'}
-    timeline = [{
-        'title': 'bananas on toast',
-        'date': '25th September 2014',
-    }, None, None, None, None]
-    context = {'patent': patent, 'timeline': timeline}
-    return render(request, 'patent/patent.html', context)
-
 def glyphify(timeline):
     """
     Add glyph annotations to timeline items
@@ -93,5 +84,9 @@ def glyphify(timeline):
     for event in timeline:
         if 'event_type' in event:
             glyph, catagory = EVENT_GLYPH_SET[event["event_type"]]
-            event["glyph"] = glyph
-            event["catagory"] = catagory
+
+        if 'annotation_type' in event:
+            glyph, catagory = ANNOTATION_GLYPH_SET[event['annotation_type']]
+
+        event["glyph"] = glyph
+        event["catagory"] = catagory

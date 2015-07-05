@@ -1,7 +1,7 @@
 __author__ = 'Benjamin George Roberts <benjamin.roberts@anu.edu.au>'
 from collections import defaultdict
 
-EVENT_GLYPH_SET = defaultdict(lambda x: ('info', 'glyphicon-question-sign'))
+EVENT_GLYPH_SET = defaultdict(lambda: ('info', 'glyphicon-question-sign'))
 __GLYPH_SET__ = {
     'application': ('glyphicon-heart', 'success'),
     'notice_filed': ('glyphicon-duplicate', 'info'),

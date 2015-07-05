@@ -17,8 +17,12 @@
         <li{% cycle '' ' class="timeline-inverted"' %}>
             <div class="timeline-badge {{ event.catagory }}"><i class="glyphicon {{ event.glyph }}"></i></div>
             <div class="timeline-panel">
-                <h4 class="timeline-title">{% if event.event %}{{ event.event }}{% else %}{{ event.annotation_type }}{% endif %}{% if event.title %} - {{ event.title }}{% endif %}</h4>
-                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ event.date }}</small></p>
+                <h4 class="timeline-title">
+                    {% if event.link %}<a href="{{ event.link }}">{% endif %}
+                    {% if event.event %}{{ event.event }}{% else %}{{ event.annotation_type }}{% endif %}{% if event.title %} - {{ event.title }}{% endif %}
+                    {% if event.link %}</a>{% endif %}
+                </h4>
+                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ event.date }}{% if event.link %} - <a href="{{ event.link }}">{{ event.link }}</a>{% endif %}</small></p>
                 <div class="timeline-body">
                     {% if event.information %}
                         <ul>
