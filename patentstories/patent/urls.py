@@ -6,6 +6,6 @@ from .views import view_patent, add_annotation, search_patent
 
 urlpatterns = [
     url(r'^$', search_patent, name='search_patent'),
-    url(r'^(?P<patent_id>\w*)/$', view_patent, name='patent'),
-    url(r'^(?P<patent_id>\w*)/annotate/$', add_annotation, name='add_annotation'),
+    url(r'^(?P<patent_id>\w+)/$', view_patent, name='patent'),
+    url(r'^(?P<patent_id>\w+)/annotate/$', add_annotation, name='add_annotation'),
 ]
