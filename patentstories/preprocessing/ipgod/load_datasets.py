@@ -12,7 +12,7 @@ class DataSet:
         :param dataset_path: path to dataset csv
         :type dataset_file: Path
         """
-        self.dataset_name = dataset_path.name.split(".")[0]
+        self.dataset_name = dataset_path.name.split(" ")[0] #dataset: "NAME DATE.csv" -> table: "NAME"
         self.dataset_file = dataset_path.open("r", encoding='latin-1')
         self.column_names = self.dataset_file.readline().strip().split(",")
 
