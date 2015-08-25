@@ -152,7 +152,7 @@ class Production(Base):
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-    ALLOWED_HOSTS = ["patentstori.es", "127.0.0.1"]
+    ALLOWED_HOSTS = ["patentstori.es", "127.0.0.1", "govhack2015.bgroberts.id.au"]
 
 
     # Database
